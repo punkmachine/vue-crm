@@ -10,6 +10,22 @@ const routes = [
 		name: 'home',
 		component: HomeView,
 	},
+	{
+		path: '/login',
+		name: 'login',
+		meta: {
+			layout: 'empty',
+		},
+		component: () => import('../views/LoginView'),
+	},
+	{
+		path: '/categories',
+		name: 'categories',
+		meta: {
+			layout: 'main',
+		},
+		component: () => import('../views/CategoriesView'),
+	},
 ];
 
 const router = new VueRouter({
