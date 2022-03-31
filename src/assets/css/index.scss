@@ -44,10 +44,6 @@
 		transition: transform 0.3s;
 		bottom: 0 !important;
 		height: auto !important;
-
-		.open {
-			transform: translateX(0);
-		}
 	}
 
 	&-content {
@@ -55,10 +51,6 @@
 		padding-left: 250px;
 		transition: padding-left 0.3s;
 		position: relative;
-
-		.full {
-			padding-left: 0;
-		}
 	}
 }
 
@@ -113,6 +105,14 @@
 			margin-bottom: 2rem;
 		}
 	}
+}
+
+.open {
+	transform: translateX(0);
+}
+
+.full {
+	padding-left: 0;
 }
 
 .nav-wrapper {
