@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { Vuelidate } from 'vuelidate';
 import 'materialize-css/dist/js/materialize.min.js';
 
 import App from './App.vue';
@@ -10,6 +11,8 @@ import store from './store';
 import { dateFilter } from './filters/date.filter';
 
 Vue.config.productionTip = false;
+
+Vue.use(Vuelidate);
 
 Vue.filter('date', dateFilter);
 
