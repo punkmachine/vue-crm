@@ -1,7 +1,7 @@
 <template>
 	<div class="app-main-layout">
 		<Navbar @click="isOpen = !isOpen" />
-		<Sidebar v-model="isOpen" />
+		<Sidebar :isOpen="isOpen" />
 
 		<main class="app-content" :class="{ full: !isOpen }">
 			<div class="app-page">
