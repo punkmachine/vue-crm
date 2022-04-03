@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import auth from './auth';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -8,5 +10,7 @@ export default new Vuex.Store({
 	getters: {},
 	mutations: {},
 	actions: {},
-	modules: {},
+	modules: {
+		auth,
+	},
 });
