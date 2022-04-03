@@ -10,9 +10,13 @@ import store from './store';
 
 import { dateFilter } from './filters/date.filter';
 
+import messagePlugin from '@/utils/message.plugin';
+
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
+
+Vue.use(messagePlugin);
 
 Vue.filter('date', dateFilter);
 
