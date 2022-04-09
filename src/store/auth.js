@@ -1,6 +1,12 @@
 /* eslint-disable */
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+	getAuth,
+	signOut,
+	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
+} from 'firebase/auth';
+import { getDatabase, set, ref } from 'firebase/database';
 
 export default {
 	actions: {
@@ -12,9 +18,44 @@ export default {
 					const user = userCredential.user;
 				})
 				.catch((error) => {
+					const errorCode = error.code;
+					commit('setError', errorCode);
 					throw error;
-					// const errorCode = error.code;
-					// const errorMessage = error.message;
+				});
+		},
+
+		async register({ dispatch, commit }, { email, password, name }) {
+			const auth = getAuth();
+
+			await createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const user = userCredential.user;
+					const { uid } = user;
+
+					return uid;
+				})
+				.then(async (uid) => {
+					const database = getDatabase();
+					await set(ref(database, `/users/${uid}`), {
+						money: 10000,
+						name,
+					});
+				})
+				.catch((error) => {
+					commit('setError', error);
+					throw error;
+				});
+		},
+
+		async exit() {
+			const auth = getAuth();
+
+			await signOut(auth)
+				.then(() => {
+					console.log('Успешно!');
+				})
+				.catch((error) => {
+					console.log('error exit >>>', error);
 				});
 		},
 	},

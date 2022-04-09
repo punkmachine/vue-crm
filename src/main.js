@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { Vuelidate } from 'vuelidate';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+// import { getDatabase } from 'firebase/database';
 import 'materialize-css/dist/js/materialize.min.js';
 
 import App from './App.vue';
@@ -31,6 +32,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+// // eslint-disable-next-line
+// const database = getDatabase(app);
 
 let appVue;
 
