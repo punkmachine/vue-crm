@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import auth from './auth';
 import user from './user';
+import category from './category';
 
 Vue.use(Vuex);
 
@@ -29,6 +30,6 @@ export default new Vuex.Store({
 		},
 	},
 	modules: {
-		auth, user
+		auth, user, category
 	},
 });
