@@ -1,21 +1,36 @@
-/* eslint-disable */
-
 import {
 	getAuth,
 	signOut,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	// onAuthStateChanged
 } from 'firebase/auth';
 import { getDatabase, set, ref } from 'firebase/database';
 
 export default {
+	state: {
+		uid: null,
+	},
+	getters: {
+		getUid: (state) => state.uid,
+	},
+	mutations: {
+		setUid(state, uid) {
+			state.uid = uid;
+		},
+		clearUid(state) {
+			state.uid = null;
+		}
+	},
 	actions: {
-		async login({ dispatch, commit }, { email, password }) {
+		async login({ commit }, { email, password }) {
 			const auth = getAuth();
 
 			await signInWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
 					const user = userCredential.user;
+					const { uid } = user;
+					commit('setUid', uid);
 				})
 				.catch((error) => {
 					const errorCode = error.code;
@@ -24,13 +39,15 @@ export default {
 				});
 		},
 
-		async register({ dispatch, commit }, { email, password, name }) {
+		async register({ commit }, { email, password, name }) {
 			const auth = getAuth();
 
 			await createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
 					const user = userCredential.user;
 					const { uid } = user;
+
+					commit('setUid', uid);
 
 					return uid;
 				})
@@ -47,16 +64,24 @@ export default {
 				});
 		},
 
-		async exit() {
+		async exit({ commit }) {
 			const auth = getAuth();
 
 			await signOut(auth)
 				.then(() => {
-					console.log('Успешно!');
+					commit('clearUser');
+					commit('clearUid');
 				})
 				.catch((error) => {
 					console.log('error exit >>>', error);
 				});
 		},
+
+		checkAuth({ commit }) {
+			const auth = getAuth();
+			const user = auth.currentUser;
+			const { uid } = user;
+			commit('setUid', uid);
+		}
 	},
 };

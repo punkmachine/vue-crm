@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { Vuelidate } from 'vuelidate';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-// import { getDatabase } from 'firebase/database';
 import 'materialize-css/dist/js/materialize.min.js';
 
 import App from './App.vue';
@@ -12,13 +11,21 @@ import router from './router';
 import store from './store';
 
 import { dateFilter } from './filters/date.filter';
+import { currencyFilter } from './filters/currency.filter';
 
 import messagePlugin from '@/utils/message.plugin';
 
+import Loader from '@/components/app/Loader.vue';
+
 Vue.config.productionTip = false;
+
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
+
 Vue.filter('date', dateFilter);
+Vue.filter('currency', currencyFilter);
+
+Vue.component('app-loader', Loader);
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyDvoMlJHjtRYdexfsI2uAvSrJBfybPHLT4',
@@ -32,8 +39,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-// // eslint-disable-next-line
-// const database = getDatabase(app);
 
 let appVue;
 

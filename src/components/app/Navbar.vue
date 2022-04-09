@@ -5,7 +5,7 @@
 				<a href="#" @click.prevent="$emit('click')">
 					<i class="material-icons black-text">dehaze</i>
 				</a>
-				<span class="black-text">{{ date | date('datetime') }}</span>
+				<!-- <span class="black-text">{{ date | date("datetime") }}</span> -->
 			</div>
 
 			<ul class="right hide-on-small-and-down">
@@ -15,7 +15,7 @@
 						data-target="dropdown"
 						ref="dropdown"
 					>
-						USER NAME
+						{{ name }}
 						<i class="material-icons right">arrow_drop_down</i>
 					</a>
 
@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import M from 'materialize-css';
+import M from "materialize-css";
 
 export default {
-	name: 'app-navbar',
+	name: "app-navbar",
 	data() {
 		return {
 			date: new Date(),
@@ -58,8 +58,13 @@ export default {
 	},
 	methods: {
 		async exitClick() {
-			await this.$store.dispatch('exit');
-			this.$router.push('/login?message=exit');
+			await this.$store.dispatch("exit");
+			this.$router.push("/login?message=exit");
+		},
+	},
+	computed: {
+		name() {
+			return this.$store.getters.getUser.name;
 		},
 	},
 	mounted() {

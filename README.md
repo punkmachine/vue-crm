@@ -1,5 +1,9 @@
 # vue-crm
 
+## Заметки.
+Для работоспособности приложения нужно создать файл .env, в который необходимо переместить переменную VUE_APP_FIXER_API_KEY. 
+Ключ API можно взять с сайта fixer.io, на котором есть бесплатный тарифный план для тестовых работ.
+
 ## Project setup
 ```
 npm install
@@ -19,6 +23,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
