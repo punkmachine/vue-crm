@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import EmptyLayout from '@/layouts/EmptyLayout.vue';
-import MainLayout from '@/layouts/MainLayout.vue';
+import EmptyLayout from "@/layouts/EmptyLayout.vue";
+import MainLayout from "@/layouts/MainLayout.vue";
 
 export default {
 	computed: {
 		layout() {
-			return `${this.$route.meta.layout ?? 'empty'}-layout`;
+			return `${this.$route.meta.layout ?? "empty"}-layout`;
 		},
 	},
 	components: {
@@ -24,6 +24,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~materialize-css/dist/css/materialize.min.css';
-@import '@/assets/css/index.scss';
+@import "@/assets/css/index.scss";
 </style>
