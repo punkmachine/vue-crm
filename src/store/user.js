@@ -1,4 +1,4 @@
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 
 export default {
 	state: {
@@ -25,9 +25,33 @@ export default {
 					commit('setUser', data);
 				});
 			} catch (error) {
-				console.log(error);
+				commit('setError', error);
+				throw error;
 			}
+		},
+		async updateUser({ commit, getters }, newData) {
+			try {
+				const { uid } = newData;
+				const dataUser = {
+					...getters.getUser,
+					...newData,
+					id: uid,
+				};
 
+				const db = getDatabase();
+				const dbRef = ref(db);
+
+				let updates = {};
+				updates[`/users/${uid}`] = {
+					...dataUser
+				};
+
+				await update(dbRef, updates);
+				commit('setUser', dataUser);
+			} catch (error) {
+				commit('setError', error);
+				throw error;
+			}
 		}
 	},
 }
