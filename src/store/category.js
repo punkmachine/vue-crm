@@ -2,6 +2,25 @@ import { getDatabase, ref, set, child, get, update } from "firebase/database";
 import uniqid from 'uniqid';
 
 export default {
+	state: {
+		categories: {},
+	},
+	getters: {
+		getCategoriesArray(state) {
+			let newCategories = [];
+
+			for (let key in state.categories) {
+				newCategories.push(state.categories[key]);
+			}
+
+			return newCategories;
+		}
+	},
+	mutations: {
+		setCategories(state, categories) {
+			state.categories = { ...categories };
+		}
+	},
 	actions: {
 		async createCategory({ commit }, { title, limit, uid }) {
 			try {
@@ -26,7 +45,7 @@ export default {
 			try {
 				const db = getDatabase();
 				const dbRef = ref(db);
-				const categories = get(child(dbRef, `users/${uid}/categories/`))
+				const categories = await get(child(dbRef, `users/${uid}/categories/`))
 					.then((snapshot) => {
 						if (snapshot.exists()) {
 							return snapshot.val();
@@ -35,7 +54,7 @@ export default {
 						console.error(error);
 					});
 
-				return categories;
+				commit('setCategories', categories);
 			} catch (error) {
 				commit('setError', error);
 				throw error;

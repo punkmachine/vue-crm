@@ -126,14 +126,10 @@ export default {
 		sum: { required, minValue: minValue(100) },
 	},
 	async mounted() {
-		const newCategories = await this.$store.dispatch("fetchAllCategories", {
+		await this.$store.dispatch("fetchAllCategories", {
 			uid: this.$store.getters.getUid,
 		});
-
-		for (let key in newCategories) {
-			this.categories.push(newCategories[key]);
-		}
-
+		this.categories = this.$store.getters.getCategoriesArray;
 		this.loading = false;
 
 		if (this.categories.length > 0) {
