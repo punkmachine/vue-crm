@@ -22,8 +22,9 @@ export default {
 		}
 	},
 	actions: {
-		async createCategory({ commit }, { title, limit, uid }) {
+		async createCategory({ commit, getters }, { title, limit }) {
 			try {
+				const uid = getters.getUid;
 				const database = getDatabase();
 				const id = uniqid();
 				await set(ref(database, `/users/${uid}/categories/${id}`), {
@@ -41,8 +42,9 @@ export default {
 			}
 		},
 
-		async fetchAllCategories({ commit }, { uid }) {
+		async fetchAllCategories({ commit, getters }) {
 			try {
+				const uid = getters.getUid;
 				const db = getDatabase();
 				const dbRef = ref(db);
 				const categories = await get(child(dbRef, `users/${uid}/categories/`))

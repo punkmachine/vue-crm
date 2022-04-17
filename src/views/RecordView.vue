@@ -126,9 +126,7 @@ export default {
 		sum: { required, minValue: minValue(100) },
 	},
 	async mounted() {
-		await this.$store.dispatch("fetchAllCategories", {
-			uid: this.$store.getters.getUid,
-		});
+		await this.$store.dispatch("fetchAllCategories");
 		this.categories = this.$store.getters.getCategoriesArray;
 		this.loading = false;
 
@@ -162,7 +160,6 @@ export default {
 				if (this.canCreateRecord) {
 					try {
 						await this.$store.dispatch("createRecord", {
-							uid: this.$store.getters.getUid,
 							description: this.description,
 							categoryId: this.selectCategory,
 							type: this.type,
@@ -177,7 +174,6 @@ export default {
 
 						await this.$store.dispatch("updateUser", {
 							money: newMoney,
-							uid: this.$store.getters.getUid,
 						});
 
 						this.$message("Запись успешно создана");

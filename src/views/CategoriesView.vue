@@ -54,9 +54,7 @@ export default {
 		},
 	},
 	async mounted() {
-		await this.$store.dispatch("fetchAllCategories", {
-			uid: this.$store.getters.getUid,
-		});
+		await this.$store.dispatch("fetchAllCategories");
 
 		this.categories = this.$store.getters.getCategoriesArray;
 		this.loading = false;

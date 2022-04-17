@@ -5,7 +5,10 @@ export default {
 		user: {},
 	},
 	getters: {
-		getUser: (state) => state.user,
+		getUser: (state) => ({
+			money: state.user.money,
+			name: state.user.name,
+		}),
 	},
 	mutations: {
 		setUser(state, user) {
@@ -16,8 +19,9 @@ export default {
 		}
 	},
 	actions: {
-		fetchInfoUser({ commit }, { uid }) {
+		fetchInfoUser({ commit, getters }) {
 			try {
+				const uid = getters.getUid;
 				const database = getDatabase();
 				const dataRef = ref(database, `/users/${uid}`);
 				onValue(dataRef, (snapshot) => {
@@ -31,11 +35,10 @@ export default {
 		},
 		async updateUser({ commit, getters }, newData) {
 			try {
-				const { uid } = newData;
+				const uid = getters.getUid;
 				const dataUser = {
 					...getters.getUser,
 					...newData,
-					id: uid,
 				};
 
 				const db = getDatabase();

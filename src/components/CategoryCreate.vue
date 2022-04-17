@@ -89,7 +89,6 @@ export default {
 						{
 							title: this.title,
 							limit: this.limit,
-							uid: this.$store.getters.getUid,
 						}
 					);
 

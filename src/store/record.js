@@ -3,9 +3,10 @@ import { getDatabase, ref, set } from "firebase/database";
 
 export default {
 	actions: {
-		async createRecord({ commit }, record) {
+		async createRecord({ commit, getters }, record) {
 			try {
-				const { uid, categoryId, description, sum, type, date } = record;
+				const uid = getters.getUid;
+				const { categoryId, description, sum, type, date } = record;
 				const database = getDatabase();
 				const id = uniqid();
 

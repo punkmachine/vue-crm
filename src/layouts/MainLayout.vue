@@ -35,10 +35,9 @@ export default {
 	async mounted() {
 		if (!this.$store.getters.getUid) {
 			await this.$store.dispatch("checkAuth");
-			await this.$store.dispatch("fetchInfoUser", {
-				uid: this.$store.getters.getUid,
-			});
 		}
+
+		await this.$store.dispatch("fetchInfoUser");
 
 		this.loading = false;
 	},
