@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { getAuth } from 'firebase/auth';
 
 Vue.use(VueRouter);
 
@@ -9,6 +10,7 @@ const routes = [
 		name: 'home',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/HomeView'),
 	},
@@ -33,6 +35,7 @@ const routes = [
 		name: 'record',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/RecordView'),
 	},
@@ -41,6 +44,7 @@ const routes = [
 		name: 'categories',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/CategoriesView'),
 	},
@@ -49,6 +53,7 @@ const routes = [
 		name: 'profile',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/ProfileView'),
 	},
@@ -57,6 +62,7 @@ const routes = [
 		name: 'planning',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/PlanningView'),
 	},
@@ -65,6 +71,7 @@ const routes = [
 		name: 'history',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/HistoryView'),
 	},
@@ -73,6 +80,7 @@ const routes = [
 		name: 'record-detail',
 		meta: {
 			layout: 'main',
+			auth: true,
 		},
 		component: () => import('../views/DetailRecordView'),
 	},
@@ -82,6 +90,18 @@ const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes,
+});
+
+/* eslint-disable */
+
+router.beforeEach((to, from, next) => {
+	const { currentUser } = getAuth();
+
+	if ((to.meta.auth && currentUser) || !to.meta.auth) {
+		next()
+	} else {
+		next('/login?messag=login-please')
+	}
 });
 
 export default router;
