@@ -21,6 +21,6 @@ export default {
 				commit('setError', error);
 				throw error;
 			}
-		}
+		},
 	},
 }

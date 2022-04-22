@@ -7,13 +7,7 @@ export default {
 	},
 	getters: {
 		getCategoriesArray(state) {
-			let newCategories = [];
-
-			for (let key in state.categories) {
-				newCategories.push(state.categories[key]);
-			}
-
-			return newCategories;
+			return Object.keys(state.categories).map(key => ({ ...state.categories[key], id: key }));
 		}
 	},
 	mutations: {
