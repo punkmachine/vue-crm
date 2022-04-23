@@ -76,7 +76,7 @@ const routes = [
 		component: () => import('../views/HistoryView'),
 	},
 	{
-		path: '/record-detail/:id',
+		path: '/record-detail/id=:id&categoryId=:categoryId',
 		name: 'record-detail',
 		meta: {
 			layout: 'main',

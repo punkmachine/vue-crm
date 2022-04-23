@@ -46,6 +46,7 @@ export default {
 						return {
 							...record,
 							categoryName: category.title,
+							categoryId: category.id,
 							typeClass:
 								record.type === "income" ? "green" : "red",
 							typeText:

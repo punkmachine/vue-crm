@@ -26,7 +26,11 @@
 					<button
 						v-tooltip="'Подробнее'"
 						class="btn-small btn"
-						@click="$router.push(`/record-detail/${record.id}`)"
+						@click="
+							$router.push(
+								`/record-detail/id=${record.id}&categoryId=${record.categoryId}`
+							)
+						"
 					>
 						<i class="material-icons">open_in_new</i>
 					</button>

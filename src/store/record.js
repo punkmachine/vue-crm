@@ -1,5 +1,7 @@
 import uniqid from 'uniqid';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, child, get } from "firebase/database";
+
+/* eslint-disable */
 
 export default {
 	actions: {
@@ -22,5 +24,25 @@ export default {
 				throw error;
 			}
 		},
+		async fetchRecord({ commit, getters }, { id, categoryId }) {
+			try {
+				const uid = getters.getUid;
+				const db = getDatabase();
+				const dbRef = ref(db);
+				const record = await get(child(dbRef, `users/${uid}/categories/${categoryId}/records/${id}`))
+					.then((snapshot) => {
+						if (snapshot.exists()) {
+							return snapshot.val();
+						}
+					}).catch((error) => {
+						console.error(error);
+					});
+
+				return record;
+			} catch (error) {
+				commit('setError', error);
+				throw error;
+			}
+		}
 	},
 }
