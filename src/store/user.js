@@ -6,8 +6,7 @@ export default {
 	},
 	getters: {
 		getUser: (state) => ({
-			money: state.user.money,
-			name: state.user.name,
+			...state.user
 		}),
 	},
 	mutations: {
