@@ -107,6 +107,11 @@ import { required, minValue } from "vuelidate/lib/validators";
 
 export default {
 	name: "record-create",
+	metaInfo() {
+		return {
+			title: this.$title("Menu_NewRecord"),
+		};
+	},
 	data() {
 		return {
 			description: "",

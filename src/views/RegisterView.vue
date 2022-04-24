@@ -96,15 +96,20 @@
 </template>
 
 <script>
-import { email, required, minLength } from 'vuelidate/lib/validators';
+import { email, required, minLength } from "vuelidate/lib/validators";
 
 export default {
-	name: 'app-register',
+	name: "app-register",
+	metaInfo() {
+		return {
+			title: this.$title("Register"),
+		};
+	},
 	data() {
 		return {
-			email: '',
-			password: '',
-			name: '',
+			email: "",
+			password: "",
+			name: "",
 			agree: false,
 		};
 	},
@@ -126,8 +131,8 @@ export default {
 				};
 
 				try {
-					await this.$store.dispatch('register', formData);
-					this.$router.push('/');
+					await this.$store.dispatch("register", formData);
+					this.$router.push("/");
 				} catch (error) {
 					console.log(error);
 				}

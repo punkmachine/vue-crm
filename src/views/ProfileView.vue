@@ -48,6 +48,11 @@ import M from "materialize-css";
 
 export default {
 	name: "profileView",
+	metaInfo() {
+		return {
+			title: this.$title("ProfileTitle"),
+		};
+	},
 	data() {
 		return {
 			name: "",

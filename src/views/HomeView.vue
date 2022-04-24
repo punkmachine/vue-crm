@@ -28,6 +28,11 @@ import HomeCurrency from "@/components/HomeCurrency.vue";
 
 export default {
 	name: "HomeView",
+	metaInfo() {
+		return {
+			title: this.$title("Menu_Bill"),
+		};
+	},
 	data() {
 		return {
 			loading: true,

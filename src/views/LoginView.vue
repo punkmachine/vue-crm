@@ -73,15 +73,20 @@
 </template>
 
 <script>
-import { email, required, minLength } from 'vuelidate/lib/validators';
-import messages from '@/constants/messages';
+import { email, required, minLength } from "vuelidate/lib/validators";
+import messages from "@/constants/messages";
 
 export default {
-	name: 'app-login',
+	name: "app-login",
+	metaInfo() {
+		return {
+			title: this.$title("Login"),
+		};
+	},
 	data() {
 		return {
-			email: '',
-			password: '',
+			email: "",
+			password: "",
 		};
 	},
 	validations: {
@@ -104,10 +109,10 @@ export default {
 				};
 
 				try {
-					await this.$store.dispatch('login', formData);
-					this.$router.push('/');
+					await this.$store.dispatch("login", formData);
+					this.$router.push("/");
 				} catch (error) {
-					console.log('error >>>', error);
+					console.log("error >>>", error);
 				}
 			}
 		},

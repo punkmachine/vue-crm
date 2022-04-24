@@ -32,8 +32,6 @@
 </template>
 
 <script>
-/* eslint-disable */
-
 import paginationMixin from "@/mixins/pagination.mixin";
 import HistoryTable from "@/components/HistoryTable.vue";
 import { Pie } from "vue-chartjs";
@@ -42,6 +40,11 @@ export default {
 	name: "HistoryView",
 	extends: Pie,
 	mixins: [paginationMixin],
+	metaInfo() {
+		return {
+			title: this.$title("Menu_History"),
+		};
+	},
 	data() {
 		return {
 			loading: true,
