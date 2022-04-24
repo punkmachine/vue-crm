@@ -15,6 +15,7 @@ import Loader from '@/components/app/Loader.vue';
 
 import { dateFilter } from '@/filters/date.filter';
 import { currencyFilter } from '@/filters/currency.filter';
+import { localizeFilter } from '@/filters/localize.filter';
 
 import tooltipDirective from '@/directives/tooltip.directive';
 
@@ -32,6 +33,7 @@ Vue.use(messagePlugin);
 
 Vue.filter('date', dateFilter);
 Vue.filter('currency', currencyFilter);
+Vue.filter('localize', localizeFilter);
 
 const firebaseConfig = {
 	apiKey: process.env.VUE_APP_FIREBASE_API_KEY,

@@ -11,7 +11,6 @@
 	user-select: none;
 }
 
-
 //мой код
 .empty-layout {
 	display: flex;
@@ -19,6 +18,10 @@
 	align-items: center;
 	padding-top: 5rem;
 	height: 100vh;
+}
+
+.switch-mb {
+	margin-bottom: 2rem;
 }
 
 .auth {

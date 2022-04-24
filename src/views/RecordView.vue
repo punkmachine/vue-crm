@@ -1,14 +1,16 @@
 <template>
 	<div>
 		<div class="page-title">
-			<h3>Новая запись</h3>
+			<h3>{{ "Menu_NewRecord" | localize }}</h3>
 		</div>
 
 		<app-loader v-if="loading" />
 
 		<p class="center" v-else-if="!(categories.length > 0)">
-			Категорий пока нет.
-			<router-link to="/categories">Создать категорию</router-link>
+			{{ "NoCategories" | localize }}
+			<router-link to="/categories">
+				{{ "AddFirst" | localize }}
+			</router-link>
 		</p>
 
 		<form v-else class="form" @submit.prevent="createRecord">
@@ -22,7 +24,7 @@
 						{{ category.title }}
 					</option>
 				</select>
-				<label>Выберите категорию</label>
+				<label>{{ "SelectCategory" | localize }}</label>
 			</div>
 
 			<p>
@@ -34,7 +36,7 @@
 						value="income"
 						v-model="type"
 					/>
-					<span>Доход</span>
+					<span>{{ "Income" | localize }}</span>
 				</label>
 			</p>
 
@@ -47,7 +49,7 @@
 						value="outcome"
 						v-model="type"
 					/>
-					<span>Расход</span>
+					<span>{{ "Outcome" | localize }}</span>
 				</label>
 			</p>
 
@@ -62,18 +64,13 @@
 							(!$v.sum.required || !$v.sum.minValue),
 					}"
 				/>
-				<label for="amount">Сумма</label>
+				<label for="amount">{{ "Amount" | localize }}</label>
 				<span
 					class="helper-text invalid"
-					v-if="$v.sum.$dirty && !$v.sum.required"
+					v-if="$v.sum.$dirty && !$v.sum.minValue"
 				>
-					Сумма обязательным полем
-				</span>
-				<span
-					class="helper-text invalid"
-					v-else-if="$v.sum.$dirty && !$v.sum.minValue"
-				>
-					Нельзя использовать значение меньше 100 тенге
+					{{ "Message_MinLength" | localize }}
+					{{ $v.amount.$params.minValue.min }}
 				</span>
 			</div>
 
@@ -87,17 +84,17 @@
 							$v.description.$dirty && !$v.description.required,
 					}"
 				/>
-				<label for="description">Описание</label>
+				<label for="description">{{ "Description" | localize }}</label>
 				<span
 					class="helper-text invalid"
 					v-if="$v.description.$dirty && !$v.description.required"
 				>
-					Описание является обязательным полем
+					{{ "Message_EnterDescription" | localize }}
 				</span>
 			</div>
 
 			<button class="btn waves-effect waves-light" type="submit">
-				Создать
+				{{ "Create" | localize }}
 				<i class="material-icons right">send</i>
 			</button>
 		</form>

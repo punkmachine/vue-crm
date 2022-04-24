@@ -1,15 +1,17 @@
 <template>
 	<div>
 		<div class="page-title">
-			<h3>Планирование</h3>
+			<h3>{{ "Menu_Planning" | localize }}</h3>
 			<h4>{{ moneyUser | currency }}</h4>
 		</div>
 
 		<app-loader v-if="loading" />
 
 		<p class="center" v-else-if="!(categories.length > 0)">
-			Категорий пока нет.
-			<router-link to="/categories">Создать категорию</router-link>
+			{{ "NoCategories" | localize }}.
+			<router-link to="/categories">
+				{{ "AddFirst" | localize }}
+			</router-link>
 		</p>
 
 		<section v-else>

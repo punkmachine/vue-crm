@@ -1,5 +1,6 @@
 export function dateFilter(value, format = 'date') {
 	let options = {};
+	const locale = localStorage.getItem('locale') ?? 'ru-RU'
 
 	if (format.includes('date')) {
 		options.day = '2-digit';
@@ -13,5 +14,5 @@ export function dateFilter(value, format = 'date') {
 		options.second = '2-digit';
 	}
 
-	return new Intl.DateTimeFormat('ru-RU', options).format(value);
+	return new Intl.DateTimeFormat(locale, options).format(value);
 }

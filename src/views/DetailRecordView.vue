@@ -3,10 +3,14 @@
 		<div>
 			<div class="breadcrumb-wrap">
 				<router-link to="/history" class="breadcrumb">
-					История
+					{{ "Menu_History" | localize }}
 				</router-link>
 				<a @click.prevent class="breadcrumb">
-					{{ record.type === "income" ? "Доход" : "Расход" }}
+					{{
+						record.type === "income"
+							? "Income"
+							: "Outcome" | localize
+					}}
 				</a>
 			</div>
 
@@ -24,9 +28,18 @@
 						}"
 					>
 						<div class="card-content white-text">
-							<p>Описание: {{ record.description }}</p>
-							<p>Сумма: {{ record.sum | currency }}</p>
-							<p>Категория: {{ category.title }}</p>
+							<p>
+								{{ "Description" | localize }}:
+								{{ record.description }}
+							</p>
+							<p>
+								{{ "Amount" | localize }}:
+								{{ record.sum | currency }}
+							</p>
+							<p>
+								{{ "Category" | localize }}:
+								{{ category.title }}
+							</p>
 
 							<small>
 								{{ new Date(record.date) | date("date") }}
