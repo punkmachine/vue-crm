@@ -34,13 +34,13 @@ Vue.filter('date', dateFilter);
 Vue.filter('currency', currencyFilter);
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyDvoMlJHjtRYdexfsI2uAvSrJBfybPHLT4',
-	authDomain: 'vue-crm-19f50.firebaseapp.com',
-	projectId: 'vue-crm-19f50',
-	storageBucket: 'vue-crm-19f50.appspot.com',
-	messagingSenderId: '962104872676',
-	appId: '1:962104872676:web:aa251bcf56d15ffa5b66f1',
-	measurementId: 'G-KG26GENTTC',
+	apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+	authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.VUE_APP_FIREBASE_APP_ID,
+	measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
