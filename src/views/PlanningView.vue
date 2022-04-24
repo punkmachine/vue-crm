@@ -57,11 +57,11 @@ export default {
 					})
 				);
 
-				const spent = newRecords
-					.filter((item) => item.type === "outcome")
-					.reduce(function (prevValue, currentValue) {
-						return (prevValue += currentValue.sum);
-					}, 0);
+				const spent = newRecords.reduce((prevValue, currentValue) => {
+					return currentValue.type === "outcome"
+						? (prevValue += currentValue.sum)
+						: (prevValue = prevValue - currentValue.sum);
+				}, 0);
 
 				const percent = (100 * spent) / item.limit;
 
