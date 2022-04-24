@@ -7,6 +7,12 @@
 	opacity: 0;
 }
 
+.pagination {
+	user-select: none;
+}
+
+
+//мой код
 .empty-layout {
 	display: flex;
 	flex-direction: column;

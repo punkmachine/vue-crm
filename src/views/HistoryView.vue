@@ -16,12 +16,25 @@
 		</p>
 
 		<section v-else>
-			<HistoryTable :records="records" />
+			<HistoryTable :records="showItems" />
+
+			<app-paginate
+				v-model="page"
+				:page-count="pageCount"
+				:click-handler="paginationClick"
+				:prev-text="'Пред.'"
+				:next-text="'След.'"
+				:container-class="'pagination'"
+				:page-class="'waves-effect'"
+			/>
 		</section>
 	</div>
 </template>
 
 <script>
+/* eslint-disable */
+
+import paginationMixin from "@/mixins/pagination.mixin";
 import HistoryTable from "@/components/HistoryTable.vue";
 
 export default {
@@ -30,16 +43,33 @@ export default {
 		return {
 			loading: true,
 			categories: [],
+			records: [],
 		};
 	},
 	components: {
 		HistoryTable,
 	},
-	computed: {
-		records() {
+	mixins: [paginationMixin],
+	methods: {
+		mappingCategories(categories) {
+			return categories
+				.filter((item) => item.records)
+				.map((item) => {
+					const newRecords = Object.keys(item.records).map((key) => ({
+						...item.records[key],
+						id: key,
+					}));
+
+					return (item = {
+						...item,
+						records: [...newRecords],
+					});
+				});
+		},
+		mappingRecords(categories) {
 			let recordsArray = [];
 
-			this.categories.forEach((category) => {
+			categories.forEach((category) => {
 				recordsArray = [
 					...recordsArray,
 					...category.records.map((record) => {
@@ -66,21 +96,11 @@ export default {
 	},
 	async mounted() {
 		await this.$store.dispatch("fetchAllCategories");
-		const newCategories = this.$store.getters.getCategoriesArray;
-
-		this.categories = newCategories
-			.filter((item) => item.records)
-			.map((item) => {
-				const newRecords = Object.keys(item.records).map((key) => ({
-					...item.records[key],
-					id: key,
-				}));
-
-				return (item = {
-					...item,
-					records: [...newRecords],
-				});
-			});
+		this.categories = this.mappingCategories(
+			this.$store.getters.getCategoriesArray
+		);
+		this.records = this.mappingRecords(this.categories);
+		this.setupPagination(this.records);
 
 		this.loading = false;
 	},

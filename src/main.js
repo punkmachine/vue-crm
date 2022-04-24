@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { Vuelidate } from 'vuelidate';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import Paginate from 'vuejs-paginate';
 import 'materialize-css/dist/js/materialize.min.js';
 
 import App from './App.vue';
@@ -22,6 +23,7 @@ import messagePlugin from '@/utils/message.plugin';
 Vue.config.productionTip = false;
 
 Vue.component('app-loader', Loader);
+Vue.component('app-paginate', Paginate);
 
 Vue.directive('tooltip', tooltipDirective);
 
